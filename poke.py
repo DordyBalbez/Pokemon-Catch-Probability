@@ -13,18 +13,34 @@ class GUI:
         self.root.geometry("500x300")
         self.root.title('Pokémon Catch Probability')
 
+        self.running = False
+
         self.label = tk.Label(self.root, text='', font=('Arial', 16))
         self.label.pack(pady=10)
 
-        self.button = tk.Button(self.root, text="S'go", command=self.task)
+        self.button = tk.Button(self.root, text="S'go", command=self.start)
         self.button.pack(pady=85)
 
+        self.button = tk.Button(self.root, text="enough..", command=self.stop)
+        self.button.pack()
+
+        self.root.after(500, self.task)
         self.root.mainloop()
 
     def task(self):
+        if self.running == True:
+            self.label.config(text='', font=('Arial', 16))
+            self.label.config(text=self.sort())
+        self.root.after(500, self.task)
+
+    def start(self):
+        self.running = True
+        return self.running
+
+    def stop(self):
         self.label.config(text='', font=('Arial', 16))
-        self.label.config(text=self.sort())
-        self.root.after(1000, self.task)
+        self.running = False
+        return self.running
 
     def sort(self):
         self.P = self.get_probability()
@@ -45,9 +61,12 @@ class GUI:
 
     def get_variables(self):
         PROCESS_ALL_ACCESS = 0x1F0FFF
-        HWND = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.4").GetSafeHwnd()
-        PID = win32process.GetWindowThreadProcessId(HWND)[1]
-        processHandle = ctypes.windll.kernel32.OpenProcess(PROCESS_ALL_ACCESS, False, PID)
+        try:
+            hwnd = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.4").GetSafeHwnd()
+        except win32ui.error:
+            hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.4").GetSafeHwnd()
+        pid = win32process.GetWindowThreadProcessId(hwnd)[1]
+        processHandle = ctypes.windll.kernel32.OpenProcess(PROCESS_ALL_ACCESS, False, pid)
         BaseAddress = win32process.EnumProcessModules(processHandle)[0]
 
         base_address = int((c_int(BaseAddress).value + 0x39602E0))
