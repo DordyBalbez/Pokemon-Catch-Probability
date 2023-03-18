@@ -2,7 +2,6 @@ import numpy as np
 import ctypes
 import win32process
 import win32ui
-from ctypes import *
 import tkinter as tk
 from ReadWriteMemory import ReadWriteMemory
 
@@ -67,11 +66,9 @@ class GUI:
             hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         processHandle = ctypes.windll.kernel32.OpenProcess(PROCESS_ALL_ACCESS, False, pid)
-        BaseAddress = win32process.EnumProcessModulesEx(processHandle, 0x02)[0]  #need this to return 64_bit address
+        BaseAddress = win32process.EnumProcessModulesEx(processHandle, 0x02)[0]
 
-        base_address = int((c_int64(BaseAddress).value + 0x2758E30))
-        print(processHandle)
-        print (base_address)
+        base_address = int((ctypes.c_int64(BaseAddress).value + 0x2758E30))
         rwm = ReadWriteMemory()
         process = rwm.get_process_by_name("visualboyadvance-m.exe")
         process.open()
