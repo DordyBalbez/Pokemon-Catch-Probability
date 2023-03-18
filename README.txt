@@ -15,3 +15,4 @@ Next:
 Support for later gens, Japanese ROMs, and other emulators
 Prettier GUI
 MacOS support
+32-bit version is like 4 lines of code different I should just make a 32-bit version..
