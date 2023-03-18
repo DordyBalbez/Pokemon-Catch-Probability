@@ -12,6 +12,6 @@ Hit S'Go when the game is running, it should have three probabilities, 0.01, 0.0
 When entering into battle with a wild pokemon, the probabilities should change
 
 Next:
-Support for later gens and other emulators
+Support for later gens, Japanese ROMs, and other emulators
 Prettier GUI
 MacOS support
