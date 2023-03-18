@@ -2,7 +2,6 @@ import numpy as np
 import ctypes
 import win32process
 import win32ui
-from ctypes import *
 import tkinter as tk
 from ReadWriteMemory import ReadWriteMemory
 
@@ -60,18 +59,13 @@ class GUI:
         return self.P
 
     def get_variables(self):
-        PROCESS_ALL_ACCESS = 0x1F0FFF
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
+        process_all_access = 0x1F0FFF
+        hwnd = self.get_hwnd()
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
-        processHandle = ctypes.windll.kernel32.OpenProcess(PROCESS_ALL_ACCESS, False, pid)
-        BaseAddress = win32process.EnumProcessModulesEx(processHandle, 0x02)[0]  #need this to return 64_bit address
+        process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
+        base_address = win32process.EnumProcessModulesEx(process_handle, 0x02)[0]
 
-        base_address = int((c_int64(BaseAddress).value + 0x2758E30))
-        print(processHandle)
-        print (base_address)
+        base_address = int((ctypes.c_int64(base_address).value + 0x2758E30))
         rwm = ReadWriteMemory()
         process = rwm.get_process_by_name("visualboyadvance-m.exe")
         process.open()
@@ -96,5 +90,15 @@ class GUI:
         process.close()
         return self.hp, self.hp_max, self.catch_rate, self.status
 
+    def get_hwnd(self):
+        try:
+            self.hwnd = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
+        except win32ui.error:
+            pass
+        try:
+            self.hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
+        except win32ui.error:
+            pass
+        return(self.hwnd)
 
 GUI()
