@@ -60,7 +60,7 @@ class GUI:
 
     def get_variables(self):
         process_all_access = 0x1F0FFF
-        hwnd = self.get_hwnd()
+        hwnd, yellow = self.get_hwnd()
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
         base_address = win32process.EnumProcessModulesEx(process_handle, 0x02)[0]
@@ -70,10 +70,16 @@ class GUI:
         process = rwm.get_process_by_name("visualboyadvance-m.exe")
         process.open()
 
-        current_health_pointer = process.get_pointer(base_address, [0xFE7])
-        max_health_pointer = process.get_pointer(base_address, [0xD25])
-        catch_rate_pointer = process.get_pointer(base_address, [0xFEC])
-        status_pointer = process.get_pointer(base_address, [0xFE9])
+        if yellow == True:
+            current_health_pointer = process.get_pointer(base_address, [0xFE6])
+            max_health_pointer = process.get_pointer(base_address, [0xD24])
+            catch_rate_pointer = process.get_pointer(base_address, [0xFEB])
+            status_pointer = process.get_pointer(base_address, [0xFE8])
+        else:
+            current_health_pointer = process.get_pointer(base_address, [0xFE7])
+            max_health_pointer = process.get_pointer(base_address, [0xD25])
+            catch_rate_pointer = process.get_pointer(base_address, [0xFEC])
+            status_pointer = process.get_pointer(base_address, [0xFE9])
 
         self.hp = process.read(current_health_pointer) & 0xffff
         self.hp_max = process.read(max_health_pointer) & 0xffff
@@ -91,6 +97,7 @@ class GUI:
         return self.hp, self.hp_max, self.catch_rate, self.status
 
     def get_hwnd(self):
+        yellow = False
         try:
             self.hwnd = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
         except win32ui.error:
@@ -99,6 +106,11 @@ class GUI:
             self.hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
         except win32ui.error:
             pass
-        return(self.hwnd)
+        try:
+            self.hwnd = win32ui.FindWindow(None, u"Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
+            yellow = True
+        except win32ui.error:
+            pass
+        return(self.hwnd, yellow)
 
 GUI()
