@@ -11,11 +11,17 @@ Works for all 3 American and Japanese versions
 
 Be sure that when Pokemon Version is on, that the visual boy advance window reads exactly as one of the following: 
 Pokemon Red - VisualBoyAdvance-M 2.1.5
+
 Pokemon Blue - VisualBoyAdvance-M 2.1.5
+
 Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
+
 Pocket Monsters - Red Version - VisualBoyAdvance-M 2.1.5
+
 Pocket Monsters - Green Version - VisualBoyAdvance-M 2.1.5
+
 Pocket Monsters - Blue Version - VisualBoyAdvance-M 2.1.5
+
 
 ![test]([https://imgur.com/a/mykce0n])
 <img src="https://imgur.com/a/mykce0n.gif" width="500" height="500">
