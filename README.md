@@ -28,8 +28,11 @@ Pocket Monsters - Blue Version - VisualBoyAdvance-M 2.1.5
 <img src="https://imgur.com/a/mykce0n.gif" width="500" height="500">
 
 Hit S'Go when the game is running, it should have three probabilities:
+
 Ultraball: 0.66%
+
 Greatball: 0.5%
+
 Pokeball: 0.39%
 
 When entering into battle with a wild pokemon, the probabilities should change
