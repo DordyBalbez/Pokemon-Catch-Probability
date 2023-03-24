@@ -8,6 +8,11 @@ This works for 64-bit Windows 11, with visual boy advance version 2.1.5
 
 ![](Example.gif)
 
+
+
+
+
+
 ![](it works.gif)
 
 Be sure that when Pokemon Red/Blue/Yellow Version is on, that the visual boy advance window reads exactly as one of the following: 
