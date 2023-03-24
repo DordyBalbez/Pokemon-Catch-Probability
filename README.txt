@@ -9,7 +9,10 @@ Pokemon Red - VisualBoyAdvance-M 2.1.5
 Pokemon Blue - VisualBoyAdvance-M 2.1.5
 Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
 
-Hit S'Go when the game is running, it should have three probabilities, 0.01, 0.0, 0.0
+Hit S'Go when the game is running, it should have three probabilities:
+Ultraball:0.66%
+Greatball:0.5%
+Pokeball:0.39%
 
 When entering into battle with a wild pokemon, the probabilities should change
 
