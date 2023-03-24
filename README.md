@@ -1,3 +1,5 @@
+# Pokemon-Catch-Probability
+Mean to be ran along Pokemon Red/Blue/Yellow to give live updates of catch probabilities;
 I don't condone piracy :) I assume if you're using this that you have bought a copy
 
 THIS IS A MEMORY READER, i.e., Windows will think it's a virus.
@@ -6,12 +8,12 @@ This works for 64-bit Windows 11, with visual boy advance version 2.1.5
 
 ![](Example.gif)
 
-![](it works.gif)
-
 Be sure that when Pokemon Red/Blue/Yellow Version is on, that the visual boy advance window reads exactly as one of the following: 
 Pokemon Red - VisualBoyAdvance-M 2.1.5
 Pokemon Blue - VisualBoyAdvance-M 2.1.5
 Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
+
+![](it works.gif)
 
 Hit S'Go when the game is running, it should have three probabilities:
 Ultraball: 0.66%
