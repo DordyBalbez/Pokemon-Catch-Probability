@@ -43,19 +43,15 @@ class GUI:
 
     def sort(self):
         self.P = self.get_probability()
-        ball = np.array(["Pokeball", "Greatball", "Ultraball"])
+        ball = np.array(["Pokéball", "Greatball", "Ultraball"])
         sort_ball = np.argsort(-self.P)
         ball = ball[sort_ball]
         self.output = np.vstack([-np.sort(-self.P), ball])
-        self.format_sort(self.output)
-        self.label.config(text=self.output)
-
-    def format_sort(self, output):
         probs, balls = self.output
         p1, p2, p3 = probs
         b1, b2, b3 = balls
-        self.output = str(b1) + ":" + str(p1) + "%\n" + str(b2) + ":" + str(p2) + "%\n" + str(b3) + ":" + str(p3) + "%"
-        return self.output
+        self.output = str(b1) + ": " + str(p1) + "%\n" + str(b2) + ": " + str(p2) + "%\n" + str(b3) + ": " + str(p3) + "%"
+        self.label.config(text=self.output)
 
     def get_probability(self):
         self.HP, self.HP_max, self.catch_rate, self.status = self.get_variables()
