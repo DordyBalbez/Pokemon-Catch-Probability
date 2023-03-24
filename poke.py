@@ -9,7 +9,7 @@ from ReadWriteMemory import ReadWriteMemory
 class GUI:
     def __init__(self):
         self.root = tk.Tk()
-        self.root.geometry("500x300")
+        self.root.geometry("500x200")
         self.root.title('Pokémon Catch Probability Calculator')
 
         self.running = False
@@ -18,16 +18,16 @@ class GUI:
         self.label.pack(pady=10)
 
         self.button = tk.Button(self.root, text="S'go", command=self.start)
-        self.button.pack(pady=85)
+        self.button.place(x = 50, y = 150)
 
         self.button = tk.Button(self.root, text="enough..", command=self.stop)
-        self.button.pack()
+        self.button.place(x = 375, y = 150)
 
         self.root.after(500, self.task)
         self.root.mainloop()
 
     def task(self):
-        if self.running == True:
+        if self.running:
             self.label.config(text='', font=('Arial', 16))
             self.label.config(text=self.sort())
         self.root.after(500, self.task)
@@ -44,18 +44,28 @@ class GUI:
     def sort(self):
         self.P = self.get_probability()
         ball = np.array(["Pokeball", "Greatball", "Ultraball"])
-        sort_Ball = np.argsort(-self.P)
-        ball = ball[sort_Ball]
-        output = np.vstack([-np.sort(-self.P), ball])
-        self.label.config(text=(output))
+        sort_ball = np.argsort(-self.P)
+        ball = ball[sort_ball]
+        self.output = np.vstack([-np.sort(-self.P), ball])
+        self.format_sort(self.output)
+        self.label.config(text=self.output)
+
+    def format_sort(self, output):
+        probs, balls = self.output
+        p1, p2, p3 = probs
+        b1, b2, b3 = balls
+        self.output = str(b1) + ":" + str(p1) + "%\n" + str(b2) + ":" + str(p2) + "%\n" + str(b3) + ":" + str(p3) + "%"
+        return self.output
 
     def get_probability(self):
-        self.HP, self.HP_max, self.C, self.S = self.get_variables()
-        B = np.array([255, 200, 150])
-        B_mod = np.array([12, 8, 12])
-        self.P = np.round(((self.S + 1) / (B + 1) + ((np.minimum(self.C + 1, B - self.S)) * (
-                1 + np.minimum(255, np.floor(np.floor(255 * self.HP_max / B_mod) / max(1, np.floor(self.HP / 4)))))) / (
-                                   256 * (B + 1))), 2)
+        self.HP, self.HP_max, self.catch_rate, self.status = self.get_variables()
+        balls = np.array([255, 200, 150])
+        ball_modifier = np.array([12, 8, 12])
+        self.P = (self.status + 1) / (balls + 1) + ((np.minimum(self.catch_rate + 1, balls - self.status)) * (
+                1 + np.minimum(255, np.floor(
+                    np.floor(255 * self.HP_max / ball_modifier) / max(1, np.floor(self.HP / 4)))))) / (
+                                   256 * (balls + 1))
+        self.P = np.round(100*self.P, 2)
         return self.P
 
     def get_variables(self):
@@ -70,7 +80,7 @@ class GUI:
         process = rwm.get_process_by_name("visualboyadvance-m.exe")
         process.open()
 
-        if yellow == True:
+        if yellow:
             current_health_pointer = process.get_pointer(base_address, [0xFE6])
             max_health_pointer = process.get_pointer(base_address, [0xD24])
             catch_rate_pointer = process.get_pointer(base_address, [0xFEB])
@@ -111,6 +121,7 @@ class GUI:
             yellow = True
         except win32ui.error:
             pass
-        return(self.hwnd, yellow)
+        return self.hwnd, yellow
+
 
 GUI()
