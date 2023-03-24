@@ -14,7 +14,7 @@ Pokemon Blue - VisualBoyAdvance-M 2.1.5
 Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
 
 ![test]([https://imgur.com/a/mykce0n])
-<img src="https://imgur.com/a/mykce0n" width="500" height="500">
+<img src="https://imgur.com/a/mykce0n.gif" width="500" height="500">
 
 Hit S'Go when the game is running, it should have three probabilities:
 Ultraball: 0.66%
