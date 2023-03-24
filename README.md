@@ -10,6 +10,7 @@ Works for all 3 American and Japanese versions
 ![test](https://imgur.com/a/s9M67t7)
 
 Be sure that when Pokemon Version is on, that the visual boy advance window reads exactly as one of the following: 
+
 Pokemon Red - VisualBoyAdvance-M 2.1.5
 
 Pokemon Blue - VisualBoyAdvance-M 2.1.5
