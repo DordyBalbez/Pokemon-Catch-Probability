@@ -13,7 +13,7 @@ Pokemon Red - VisualBoyAdvance-M 2.1.5
 Pokemon Blue - VisualBoyAdvance-M 2.1.5
 Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
 
-![test](https://imgur.com/a/mykce0n)
+![test]([https://imgur.com/a/mykce0n])
 <img src="https://imgur.com/a/mykce0n">
 
 Hit S'Go when the game is running, it should have three probabilities:
