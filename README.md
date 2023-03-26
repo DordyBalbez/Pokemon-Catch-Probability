@@ -7,7 +7,7 @@ THIS IS A MEMORY READER, i.e., Windows will think it's a virus.
 This works for 64-bit Windows 11, with visual boy advance version 2.1.5
 Works for all 3 American and Japanese versions
 
-<img src="Example.gif" width="600" height="350"/>
+<img src="gifs/Example.gif" width="600" height="350"/>
 
 Be sure that when Pokemon Version is on, that the visual boy advance window reads exactly as one of the following: 
 
@@ -24,7 +24,7 @@ Pocket Monsters - Green Version - VisualBoyAdvance-M 2.1.5
 Pocket Monsters - Blue Version - VisualBoyAdvance-M 2.1.5
 
 
-<img src="it works.gif" width="650" height="350"/>
+<img src="gifs/it works.gif" width="650" height="350"/>
 
 
 Hit S'Go when the game is running, it should have three probabilities:
