@@ -2,6 +2,8 @@ import numpy as np
 import ctypes
 import win32process
 import win32ui
+import ctypes.wintypes
+import pywintypes
 import tkinter as tk
 from ReadWriteMemory import ReadWriteMemory
 
@@ -31,7 +33,7 @@ class GUI:
             self.label.config(text='', font=('Arial', 16))
             try:
                 self.label.config(text=self.sort())
-            except NameError:
+            except (pywintypes.error, NameError):
                 self.running = False
         self.root.after(500, self.task)
 
