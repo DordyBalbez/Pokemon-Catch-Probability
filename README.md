@@ -1,5 +1,5 @@
 # Pokemon-Catch-Probability
-Mean to be ran along Pokemon Red/Blue/Yellow to give live updates of catch probabilities;
+Meant to be ran along Pokemon Red/Blue/Yellow to give live updates of catch probabilities;
 I don't condone piracy :) I assume if you're using this that you have bought a copy
 
 THIS IS A MEMORY READER, i.e., Windows will think it's a virus.
