@@ -96,9 +96,9 @@ class GUI:
 
         if status & 0xFF == 0:
             pass
-        elif status in {0b1000, 0b10000, 0b1000000}:
+        elif status & 0xFF in {0b1000, 0b10000, 0b1000000}:
             status = 12
-        elif status in {0b1, 0b10, 0b100, 0b100000}:
+        elif status & 0xFF in {0b1, 0b10, 0b100, 0b100000}:
             status = 25
 
         process.close()
