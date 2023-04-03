@@ -119,8 +119,6 @@ class GUI:
             for j in range(4):
                 a = read[read.columns[index]][j]
                 offsets.append(eval(a))
-        if hwnd == 0:
-            self.running = False
         return hwnd, offsets
 
 
