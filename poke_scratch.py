@@ -1,7 +1,8 @@
 import numpy as np
+import pandas as pd
 import ctypes
 import win32process
-import win32ui
+import win32gui
 import ctypes.wintypes
 import pywintypes
 import tkinter as tk
@@ -73,10 +74,7 @@ class GUI:
         process_all_access = 0x1F0FFF
         buffer = 0x2758E30
 
-        while True:
-            hwnd, offsets = self.get_hwnd()
-            if len(offsets) == 4:
-                break
+        hwnd, offsets = self.get_hwnd()
 
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
@@ -107,42 +105,22 @@ class GUI:
     def get_hwnd(self):
         global hwnd
         global offsets
+        read = pd.read_csv('Pokeman.csv')
+        hwnds = []
         try:
-            hwnd = win32ui.FindWindow(None, u"Pokemon Red - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
+            for i in read.columns:
+                hwnds.append(win32gui.FindWindowEx(None, None, None, i))
+            index = int(np.nonzero(hwnds)[0])
+            hwnd = hwnds[index]
+        except TypeError:
+            self.running = False
         else:
-            offsets = [[0xFE7], [0xD25], [0xFEC], [0xFE9]]
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pokemon Blue - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
-        else:
-            offsets = [[0xFE7], [0xD25], [0xFEC], [0xFE9]]
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
-        else:
-            offsets = [[0xFE6], [0xD24], [0xFEB], [0xFE8]]
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pocket Monsters - Red Version - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
-        else:
-            offsets = [[0xFCE], [0xD25], [0xFD3], [0xFD0]]
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pocket Monsters - Green Version - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
-        else:
-            offsets = [[0xFCE], [0xD25], [0xFD3], [0xFD0]]
-        try:
-            hwnd = win32ui.FindWindow(None, u"Pocket Monsters - Blue Version - VisualBoyAdvance-M 2.1.5").GetSafeHwnd()
-        except win32ui.error:
-            pass
-        else:
-            offsets = [[0xFCE], [0xD25], [0xFD3], [0xFD0]]
+            offsets = []
+            for j in range(4):
+                a = read[read.columns[index]][j]
+                offsets.append(eval(a))
+        if hwnd == 0:
+            self.running = False
         return hwnd, offsets
 
 
