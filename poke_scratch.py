@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 import ctypes
-import win32process
-import win32gui
 import ctypes.wintypes
 import pywintypes
+import win32process
+import win32gui
 import tkinter as tk
 from ReadWriteMemory import ReadWriteMemory
 
