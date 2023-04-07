@@ -37,7 +37,15 @@ Pokeball: 0.39%
 
 When entering into battle with a wild pokemon, the probabilities should change
 
+ ===========================================================================
+
+Version 2 is out and is much larger. I decided to release it as a directory instead of one executable. This iteration will only work if the executable is in the 
+folder, and so you'll need to copy and paste a shortcut if you'd like to have it somewhere else. Functionally, its the same as v1.618, but this version will soon 
+see support for much more games and emulators that will be much easier to implement with just adding changes to the .csv instead of the script. Also, instead of 
+ensuring that you have the games as titled above, you can change edit the .csv to match the title of the window you are playing. If you're comfortable finding 
+offsets and pointers yourself, you can add to the excel file. This makes it easy to run modded versions of the game, so long as you know which base version it's 
+based on.
+
 Next:
 Support for later gens, and other emulators
-Prettier GUI
 32-bit version is like 4 lines of code different I should just make a 32-bit version..
