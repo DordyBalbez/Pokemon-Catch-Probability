@@ -1,10 +1,10 @@
 import numpy as np
 import pandas as pd
 import ctypes
-import ctypes.wintypes
-import pywintypes
 import win32process
 import win32gui
+import ctypes.wintypes
+import pywintypes
 import tkinter as tk
 from ReadWriteMemory import ReadWriteMemory
 
@@ -72,9 +72,8 @@ class GUI:
 
     def get_variables(self):
         process_all_access = 0x1F0FFF
-        buffer = 0x2758E30
 
-        hwnd, offsets = self.get_hwnd()
+        hwnd, offsets, executable, buffer = self.get_hwnd()
 
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
@@ -82,7 +81,7 @@ class GUI:
 
         base_address = int((ctypes.c_int64(base_address).value + buffer))
         rwm = ReadWriteMemory()
-        process = rwm.get_process_by_name("visualboyadvance-m.exe")
+        process = rwm.get_process_by_name(executable)
         process.open()
 
         variables = []
@@ -105,21 +104,31 @@ class GUI:
     def get_hwnd(self):
         global hwnd
         global offsets
-        read = pd.read_csv('Pokeman.csv')
+        global executable
+        global buffer
+        read = pd.read_csv('Pokeman.csv', delimiter=',')
         hwnds = []
+
         try:
             for i in read.columns:
                 hwnds.append(win32gui.FindWindowEx(None, None, None, i))
             index = int(np.nonzero(hwnds)[0])
             hwnd = hwnds[index]
         except TypeError:
-            self.running = False
+            while True:
+                for i in read.columns:
+                    hwnds.append(win32gui.FindWindowEx(None, None, None, i))
+                if len(np.nonzero(hwnds)[0]) == 1:
+                    index = int(np.nonzero(hwnds)[0])
+                    hwnd = hwnds[index]
+                    break
         else:
             offsets = []
             for j in range(4):
                 a = read[read.columns[index]][j]
                 offsets.append(eval(a))
-        return hwnd, offsets
-
+            executable = read[read.columns[index]][4]
+            buffer = eval(read[read.columns[index]][5])
+        return hwnd, offsets, executable, buffer
 
 GUI()
