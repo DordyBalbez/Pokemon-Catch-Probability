@@ -48,7 +48,12 @@ class GUI:
         return self.running
 
     def sort(self):
-        probability = self.get_probability()
+        hp, hp_max, catch_rate, status, bool = self.get_variables()
+        gen1, gen2 = bool
+        if gen1:
+            probability = self.get_probability_gen1(hp, hp_max, catch_rate, status)
+        elif gen2:
+            probability = self.get_probability_gen2(hp, hp_max, catch_rate, status)
         ball = np.array(["Pokéball", "Greatball", "Ultraball"])
         sort_ball = np.argsort(-probability)
         ball = ball[sort_ball]
@@ -59,8 +64,15 @@ class GUI:
         output = str(b1) + ": " + str(p1) + "%\n" + str(b2) + ": " + str(p2) + "%\n" + str(b3) + ": " + str(p3) + "%"
         self.label.config(text=output)
 
-    def get_probability(self):
-        hp, hp_max, catch_rate, status = self.get_variables()
+    def get_probability_gen1(self, hp, hp_max, catch_rate, status):
+
+        if status == 0:
+            pass
+        elif status in {0b1000, 0b10000, 0b1000000}:
+            status = 12
+        elif status in {0b1, 0b10, 0b100, 0b100000}:
+            status = 25
+
         balls = np.array([255, 200, 150])
         ball_modifier = np.array([12, 8, 12])
         probability = (status + 1) / (balls + 1) + ((np.minimum(catch_rate + 1, balls - status)) * (
@@ -70,10 +82,24 @@ class GUI:
         probability = np.round(100 * probability, 2)
         return probability
 
+    def get_probability_gen2(self, hp, hp_max, catch_rate, status):
+        if hp_max == 0:
+            hp_max = 1
+        # put logic for status here
+        status = 0
+        balls = np.array([catch_rate, 1.5 * catch_rate, 2 * catch_rate])
+        calc = np.floor(((3 * hp_max - 2 * hp) * balls) / (3 * hp_max))
+        probability = np.minimum((np.maximum(calc, 1) + status), 255)
+        probability = (probability + 1) / 256
+        probability = 100 * np.round(probability, 2)
+        return probability
+
+
+
     def get_variables(self):
         process_all_access = 0x1F0FFF
 
-        hwnd, offsets, executable, buffer = self.get_hwnd()
+        hwnd, offsets, executable, buffer, bool = self.get_hwnd()
 
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
@@ -91,21 +117,15 @@ class GUI:
 
         hp, hp_max, catch_rate, status = variables
 
-        if status & 0xFF == 0:
-            pass
-        elif status & 0xFF in {0b1000, 0b10000, 0b1000000}:
-            status = 12
-        elif status & 0xFF in {0b1, 0b10, 0b100, 0b100000}:
-            status = 25
-
         process.close()
-        return hp & 0xFFFF, hp_max & 0xFFFF, catch_rate & 0xFF, status & 0xFF
+        return hp & 0xFFFF, hp_max & 0xFFFF, catch_rate & 0xFF, status & 0xFF, bool
 
     def get_hwnd(self):
         global hwnd
         global offsets
         global executable
         global buffer
+        global bool
         read = pd.read_csv('Pokeman.csv', delimiter=',')
         hwnds = []
 
@@ -129,6 +149,7 @@ class GUI:
                 offsets.append(eval(a))
             executable = read[read.columns[index]][4]
             buffer = eval(read[read.columns[index]][5])
-        return hwnd, offsets, executable, buffer
+            bool = eval(read[read.columns[index]][6])
+        return hwnd, offsets, executable, buffer, bool
 
 GUI()
