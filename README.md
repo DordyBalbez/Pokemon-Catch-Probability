@@ -9,7 +9,7 @@ Works for all 3 American and Japanese versions
 
 <img src="gifs/Example.gif" width="600" height="350"/>
 
-Be sure that when Pokemon Version is on, that the games read exactly as listed on the Pokeman.csv
+Be sure that when the game is running, that the emulator window reads exactly as a game listed on the games row of the the Pokeman.csv
 
 
 <img src="gifs/it works.gif" width="650" height="350"/>
