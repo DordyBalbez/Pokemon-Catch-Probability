@@ -1,5 +1,5 @@
 # Pokemon-Catch-Probability
-Meant to be ran along Pokemon Red/Blue/Yellow to give live updates of catch probabilities;
+Meant to be ran along Pokemon Red/Blue/Yellow, Red/Green/Blue, Gold/Silver/Crystal to give live updates of catch probabilities;
 I don't condone piracy :) I assume if you're using this that you have bought a copy
 
 THIS IS A MEMORY READER, i.e., Windows will think it's a virus.
@@ -9,35 +9,26 @@ Works for all 3 American and Japanese versions
 
 <img src="gifs/Example.gif" width="600" height="350"/>
 
-Be sure that when Pokemon Version is on, that the visual boy advance window reads exactly as one of the following: 
-
-Pokemon Red - VisualBoyAdvance-M 2.1.5
-
-Pokemon Blue - VisualBoyAdvance-M 2.1.5
-
-Pokemon - Yellow Version - VisualBoyAdvance-M 2.1.5
-
-Pocket Monsters - Red Version - VisualBoyAdvance-M 2.1.5
-
-Pocket Monsters - Green Version - VisualBoyAdvance-M 2.1.5
-
-Pocket Monsters - Blue Version - VisualBoyAdvance-M 2.1.5
+Be sure that when Pokemon Version is on, that the games read exactly as listed on the Pokeman.csv
 
 
 <img src="gifs/it works.gif" width="650" height="350"/>
 
 
-Hit S'Go when the game is running, it should have three probabilities:
-
-Ultraball: 0.66%
-
-Greatball: 0.5%
-
-Pokeball: 0.39%
+Hit S'Go when the game is running, it should have three probabilities;
 
 When entering into battle with a wild pokemon, the probabilities should change
 
+BUG: You may notice that the probabilities for gen 2 read nan%, this should change to the proper probabililties
+
+when encountering a Pokemon. In Crystal, the probabilities should fluctuate when there is an animation playing, and 
+
+settle to the correct values after the animation stops
+
+
 Next:
-Support for later gens, and other emulators
+gen 3 and 4 support, and other emulators
+
 Prettier GUI
+
 32-bit version is like 4 lines of code different I should just make a 32-bit version..
