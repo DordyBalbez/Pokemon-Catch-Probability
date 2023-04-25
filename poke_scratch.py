@@ -110,13 +110,13 @@ class GUI:
     def get_variables(self):
         process_all_access = 0x1F0FFF
 
-        hwnd, offsets, executable, buffer, bool = self.get_hwnd()
+        hwnd, offsets, executable, offset_os, bool = self.get_hwnd()
 
         pid = win32process.GetWindowThreadProcessId(hwnd)[1]
         process_handle = ctypes.windll.kernel32.OpenProcess(process_all_access, False, pid)
         base_address = win32process.EnumProcessModulesEx(process_handle, 0x02)[0]
 
-        base_address = int((ctypes.c_int64(base_address).value + buffer))
+        base_address = int((ctypes.c_int64(base_address).value + offset_os))
         rwm = ReadWriteMemory()
         process = rwm.get_process_by_name(executable)
         process.open()
@@ -135,7 +135,7 @@ class GUI:
         global hwnd
         global offsets
         global executable
-        global buffer
+        global offset_os
         global bool
         read = pd.read_csv('Pokeman.csv', delimiter=',')
         hwnds = []
@@ -159,8 +159,8 @@ class GUI:
                 a = read[read.columns[index]][j]
                 offsets.append(eval(a))
             executable = read[read.columns[index]][4]
-            buffer = eval(read[read.columns[index]][5])
+            offset_os = eval(read[read.columns[index]][5])
             bool = eval(read[read.columns[index]][6])
-        return hwnd, offsets, executable, buffer, bool
+        return hwnd, offsets, executable, offset_os, bool
 
 GUI()
