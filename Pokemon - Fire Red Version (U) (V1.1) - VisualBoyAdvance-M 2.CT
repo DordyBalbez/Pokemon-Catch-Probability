@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="42">
+  <CheatEntries>
+    <CheatEntry>
+      <ID>3</ID>
+      <Description>"current health pntr"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"visualboyadvance-m.exe"+29C9240</Address>
+      <Offsets>
+        <Offset>024082</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>4</ID>
+      <Description>"max health pntr"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"visualboyadvance-m.exe"+29C9240</Address>
+      <Offsets>
+        <Offset>024084</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>7</ID>
+      <Description>"max health pntr"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"visualboyadvance-m.exe"+29C9240</Address>
+      <Offsets>
+        <Offset>235c8</Offset>
+      </Offsets>
+    </CheatEntry>
+    <CheatEntry>
+      <ID>14</ID>
+      <Description>"max health pntr"</Description>
+      <ShowAsHex>1</ShowAsHex>
+      <ShowAsSigned>0</ShowAsSigned>
+      <VariableType>2 Bytes</VariableType>
+      <Address>"visualboyadvance-m.exe"+29C9240</Address>
+      <Offsets>
+        <Offset>23c3c</Offset>
+      </Offsets>
+    </CheatEntry>
+  </CheatEntries>
+  <UserdefinedSymbols/>
+</CheatTable>
