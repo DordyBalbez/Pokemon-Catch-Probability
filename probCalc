@@ -7,6 +7,7 @@ import ctypes.wintypes
 import pywintypes
 import tkinter as tk
 
+
 class gui:
     def __init__(self):
         self.root = tk.Tk()
@@ -107,15 +108,9 @@ class gui:
             vars.append(var)
         hp, hpMax, catchRate, status = vars
         ctypes.windll.kernel32.CloseHandle(processHandle)
-        print(hp, hpMax, catchRate, status, genBool)
         return hp & 0xFFFF, hpMax & 0xFFFF, catchRate & 0xFF, status & 0xFF, genBool
 
     def getHWND(self) -> tuple:
-        global hwnd
-        global offsets
-        global executable
-        global offset_os
-        global bool
         read = pd.read_csv("Pokeman.csv", delimiter=",")
         hwnds = []
         try:
@@ -149,5 +144,6 @@ class gui:
         ctypes.windll.kernel32.ReadProcessMemory(handle, ctypes.c_void_p(addr), buffer,
                                                  size, numBytes)
         return readBuffer.value
+
 
 gui()
