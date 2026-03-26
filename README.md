@@ -2,8 +2,6 @@
 Meant to be ran along Pokemon Red/Blue/Yellow, Red/Green/Blue, Gold/Silver/Crystal to give live updates of catch probabilities;
 I don't condone piracy :) I assume if you're using this that you have bought a copy
 
-THIS IS A MEMORY READER, i.e., Windows will think it's a virus.
-
 This works for 64-bit Windows 11, with visual boy advance version 2.1.5
 Works for all 3 American and Japanese versions
 
